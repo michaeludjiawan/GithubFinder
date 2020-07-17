@@ -4,24 +4,20 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.michaeludjiawan.githubfinder.BuildConfig
 import com.michaeludjiawan.githubfinder.data.api.ApiService
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModule = module {
-    single { createOkHttpClient(get()) }
+    single { createOkHttpClient() }
     single { createGson() }
 
     single { createWebService<ApiService>(get(), get()) }
 }
 
-fun createOkHttpClient(
-    authTokenInterceptor: Interceptor
-): OkHttpClient {
+fun createOkHttpClient(): OkHttpClient {
     return OkHttpClient.Builder()
-        .addInterceptor(authTokenInterceptor)
         .build()
 }
 
