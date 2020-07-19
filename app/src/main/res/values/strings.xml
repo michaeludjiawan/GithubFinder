@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GithubFinder</string>
+    <string name="search_input_hint">Search user</string>
+    <string name="search_btn_label">Search</string>
+    <string name="retry_btn_label">Retry</string>
+    <string name="empty_result_info">No users found.</string>
 </resources>

@@ -2,7 +2,12 @@ package com.michaeludjiawan.githubfinder.data.repository
 
 import androidx.paging.PagingSource
 import com.michaeludjiawan.githubfinder.data.api.ApiService
+import com.michaeludjiawan.githubfinder.data.api.UsersResponse
 import com.michaeludjiawan.githubfinder.data.model.User
+import org.json.JSONObject
+import retrofit2.HttpException
+import retrofit2.Response
+import java.io.IOException
 
 class UserPagingSource(
     private val apiService: ApiService,
@@ -21,11 +26,25 @@ class UserPagingSource(
                     nextKey = if (users.isEmpty()) null else position + 1
                 )
             } else {
-                return LoadResult.Error(Exception())
+                val message = getErrorMessage(response)
+                return LoadResult.Error(Exception(message))
             }
-        } catch (throwable: Throwable) {
-            return LoadResult.Error(throwable)
+        } catch (exception: IOException) {
+            LoadResult.Error(exception)
+        } catch (exception: HttpException) {
+            LoadResult.Error(exception)
         }
+    }
+
+    private fun getErrorMessage(response: Response<UsersResponse>): String {
+        return try {
+            response.errorBody()?.string()?.let {
+                val json = JSONObject(it)
+                json.getString("message")
+            }
+        } catch (e: Exception) {
+            response.message()
+        }.orEmpty()
     }
 
 }
