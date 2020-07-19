@@ -9,20 +9,22 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 
+const val INITIAL_PAGE = 1
+
 class UserPagingSource(
     private val apiService: ApiService,
     private val query: String
 ) : PagingSource<Int, User>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
-        val position = params.key ?: 1
+        val position = params.key ?: INITIAL_PAGE
         return try {
             val response = apiService.getUsers(query, position)
             if (response.isSuccessful) {
                 val users = response.body()?.items.orEmpty()
                 LoadResult.Page(
                     data = users,
-                    prevKey = if (position == 1) null else position - 1,
+                    prevKey = if (position == INITIAL_PAGE) null else position - 1,
                     nextKey = if (users.isEmpty()) null else position + 1
                 )
             } else {

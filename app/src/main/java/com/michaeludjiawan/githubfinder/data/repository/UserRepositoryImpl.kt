@@ -7,13 +7,15 @@ import com.michaeludjiawan.githubfinder.data.api.ApiService
 import com.michaeludjiawan.githubfinder.data.model.User
 import kotlinx.coroutines.flow.Flow
 
+const val DEFAULT_PAGE_SIZE = 20
+
 class UserRepositoryImpl(
     private val apiService: ApiService
 ) : UserRepository {
 
     override fun getUsers(q: String, page: Int): Flow<PagingData<User>> =
         Pager(
-            config = PagingConfig(pageSize = 20),
+            config = PagingConfig(pageSize = DEFAULT_PAGE_SIZE),
             initialKey = page,
             pagingSourceFactory = { UserPagingSource(apiService, q) }
         ).flow
