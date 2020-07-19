@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.michaeludjiawan.githubfinder.MockTestRunner"
 
         buildConfigField 'String', 'BASE_URL', '"https://api.github.com/"'
     }
@@ -34,6 +34,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
+    sourceSets {
+        androidTest.java.srcDirs += "src/sharedTest/java"
+        test.java.srcDirs += "src/sharedTest/java"
     }
 }
 
@@ -59,4 +64,8 @@ dependencies {
 
     implementation "androidx.paging:paging-runtime:3.0.0-alpha01"
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+
+    implementation "androidx.fragment:fragment:1.3.0-alpha06"
+    debugImplementation "androidx.fragment:fragment-testing:1.3.0-alpha06"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
 }
