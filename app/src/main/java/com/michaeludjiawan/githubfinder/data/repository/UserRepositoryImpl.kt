@@ -7,7 +7,7 @@ import com.michaeludjiawan.githubfinder.data.api.ApiService
 import com.michaeludjiawan.githubfinder.data.model.User
 import kotlinx.coroutines.flow.Flow
 
-const val DEFAULT_PAGE_SIZE = 20
+const val DEFAULT_PAGE_SIZE = 50
 
 class UserRepositoryImpl(
     private val apiService: ApiService
