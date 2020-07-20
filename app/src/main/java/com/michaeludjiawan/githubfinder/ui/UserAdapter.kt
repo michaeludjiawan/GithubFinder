@@ -25,8 +25,8 @@ class UserAdapter : PagingDataAdapter<User, RecyclerView.ViewHolder>(USER_COMPAR
 
     companion object {
         val USER_COMPARATOR = object : DiffUtil.ItemCallback<User>() {
-            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean = oldItem == newItem
-            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean = oldItem.id == newItem.id
+            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean = oldItem == newItem
         }
     }
 }
