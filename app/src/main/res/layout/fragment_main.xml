@@ -44,7 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:padding="24dp" />
+            android:fadeScrollbars="true"
+            android:scrollbars="vertical" />
 
         <ProgressBar
             android:id="@+id/pb_main_progress_bar"
@@ -57,8 +58,8 @@
             android:id="@+id/tv_main_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
             android:textAlignment="center"
             tools:text="Info here" />
 
